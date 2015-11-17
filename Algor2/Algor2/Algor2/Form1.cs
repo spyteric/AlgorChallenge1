@@ -31,7 +31,15 @@ namespace Algor2
             sw.Stop();
             label3.Text = (sw.Elapsed.TotalMilliseconds.ToString() + " ms").ToString();
             label4.Text = "Total is " + resultList.Count;
-            //richTextBox1.Text = string.Join(",", resultList.ToArray());
+
+            new System.Threading.Tasks.TaskFactory().StartNew(() => {
+                string a = string.Join(",", resultList.ToArray());
+                richTextBox1.Invoke((MethodInvoker)delegate {
+                    richTextBox1.Text = a;
+                });
+            });
         }
+
+
     }
 }
