@@ -11,9 +11,6 @@ namespace Algor2
     {
 
         public static List<int> calPrimeNumber1(int m, int n){
-
-            Console.WriteLine("m: " + m.ToString());
-            Console.WriteLine("n: " + n.ToString());
             int Major = m;
             int Minor = n;
             if (n > m)
