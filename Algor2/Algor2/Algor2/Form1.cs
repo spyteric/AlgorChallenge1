@@ -20,8 +20,6 @@ namespace Algor2
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
-
             System.Diagnostics.Stopwatch sw = new System.Diagnostics.Stopwatch();
             label3.Text = "???ms";
             label4.Text = "Total is ";
@@ -32,6 +30,7 @@ namespace Algor2
             sw.Stop();
             label3.Text = (sw.Elapsed.TotalMilliseconds.ToString() + " ms").ToString();
             label4.Text = "Total is " + resultList.Count;
+            sw.Start();
             //sw.Reset();
             //sw.Start();
             /*DataTable dt = new DataTable();
@@ -47,14 +46,16 @@ namespace Algor2
                 //sw.Stop();
                 //Console.WriteLine((sw.Elapsed.TotalMilliseconds.ToString() + " ms").ToString());
                 richTextBox1.Invoke((MethodInvoker)delegate {
-                    sw.Reset();
-                    sw.Start();
+                    //sw.Reset();
+                    //sw.Start();
                     richTextBox1.AppendText(a);
                     sw.Stop();
-                    Console.WriteLine((sw.Elapsed.TotalMilliseconds.ToString() + " ms").ToString());
+                    label3.Text = label3.Text + "/" + (sw.Elapsed.TotalMilliseconds.ToString() + " ms").ToString();
                 }
                 );
             });
+
+
         }
 
 
