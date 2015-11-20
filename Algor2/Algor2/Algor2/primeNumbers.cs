@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace Algor2
 {
-    class primeNumbers
+    public class primeNumbers
     {
         public static List<int> calPrimeNumber1(int m, int n){
             int Major = m;
@@ -17,17 +17,12 @@ namespace Algor2
                 Major = n;
                 Minor = m;
             }
-            double sqrt = Math.Sqrt(m);
-
+            if (Major < 2) return new List<int>();
+            Major = Major + 1;
+            double sqrt = Math.Sqrt(Major);
             bool[] OriginalArray = new bool[Major];
-
-            //for (long i = 0; i < Major; i++)  // init
-                //OriginalArray[i] = true;
-
             OriginalArray[0] = true;
             OriginalArray[1] = true;
-
-            //從2開始, 2是質數
             for (long i = 2; i <= sqrt; i++)
                 if (!OriginalArray[i])
                     for (long j = i*i; j < Major; j += i)
@@ -39,6 +34,41 @@ namespace Algor2
                     prime.Add(i);
 
             return prime;
+        }
+
+        public static List<int> LinearSieve(int m, int n)
+        {
+            int Major = m;
+            int Minor = n;
+            int b = -1;
+            if (n > m)
+            {
+                Major = n;
+                Minor = m;
+            }
+            if (Major < 2) return new List<int>();
+            Major = Major + 1;
+            bool[] sieve = new bool[Major];
+            List<int> prime = new List<int>();
+            
+            for (int i = 2; i < Major; i++)
+            {
+                if (!sieve[i])
+                {
+                    prime.Add(i);
+                    if (b == -1  && i >= Minor)
+                        b = prime.IndexOf(i);
+                }
+                for (int j = 0; i * prime[j] < Major; j++)
+                {
+                    sieve[i * prime[j]] = true;
+                    if (i % prime[j] == 0) break;
+                }
+            }
+            if (Minor < 2) return prime;
+            prime.RemoveRange(0, b);
+            return prime;
+
         }
     }
 }
